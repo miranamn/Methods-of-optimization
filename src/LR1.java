@@ -1,7 +1,5 @@
 public class LR1 {
 
-    public static final double phi = 1.61803398874989484820;
-
     public static double dihtomia(Function f, double xL, double xR, double eps) {
         double xC = 0.0;
         while (Math.abs(xR - xL) >= eps) {
@@ -15,7 +13,7 @@ public class LR1 {
     }
 
     public static double gRatio(Function f, double xL, double xR, double eps) {
-        double x1 = xL, x2 = xR, iPhi = 1 / phi, d;
+        double x1 = xL, x2 = xR, iPhi = 1 / Const.phi, d;
         while (Math.abs(xR - xL) >= eps) {
             d = x2 - x1;
             xL = x2 - d * iPhi;
