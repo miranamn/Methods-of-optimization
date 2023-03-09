@@ -13,11 +13,11 @@ public class LR1 {
     }
 
     public static double gRatio(Function f, double xL, double xR, double eps) {
-        double x1 = xL, x2 = xR, iPhi = 1 / Const.phi, d;
+        double x1 = xL, x2 = xR, d;
         while (Math.abs(xR - xL) >= eps) {
             d = x2 - x1;
-            xL = x2 - d * iPhi;
-            xR = x1 + d * iPhi;
+            xL = x2 - d * Const.iPhi;
+            xR = x1 + d * Const.iPhi;
             if (f.getF(xL) >= f.getF(xR))
                 x1 = xL;
             else

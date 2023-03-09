@@ -33,7 +33,7 @@ public class Main {
                 if(x0.size()!= x1.size())
                     System.out.println("Fake data");
                 else{
-                    System.out.println("Золотое сечение: " + LR2.gRatio(f2, x0, x1, Const.eps).get(1));
+                    System.out.println("Золотое сечение: " + LR2.gRatio(f2, x0, x1, Const.eps).toString());
                 }
         }
     }
