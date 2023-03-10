@@ -4,9 +4,7 @@ public class LR2 {
         Vector a = new Vector(x0.get(0), x0.get(1));
         Vector b = new Vector(x1.get(0), x1.get(1));
         Vector dx;
-        int counter = 0;
         while (x1.sub(x0).dimension() >= eps) {
-            counter++;
             dx = b.sub(a).mul(Const.iPhi);
             x0 = b.sub(dx);
             x1 = a.add(dx);
@@ -15,9 +13,41 @@ public class LR2 {
             else
                 b = x1;
         }
-       System.out.println("Количество итераций : " + counter);
         dx = x1.add(x0).mul(0.5);
         return dx;
    }
 
+    public static Vector descentMethod(Function2 f, Vector x, double eps) {
+       double step = 1.0;
+       Vector x1 = new Vector(x.get(0), x.get(1));
+       Vector x2 = new Vector(x.get(0), x.get(1));
+       //eps /= x2.sub(x1).dimension();
+       double t, y1, y2;
+       int id, opt_id = 0;
+       for(int i = 0; i < 1000; i++) {
+           id = i % x.size();
+           x2.set(id, x2.get(id) - eps);
+           y1 = f.getF(x2);
+           System.out.println(y1);
+           x2.set(id, x2.get(id) + 2.0 * eps);
+           y2 = f.getF(x2);
+           x2.set(id, x2.get(id) - eps);
+
+           if (y1 > y2) x2.set(id, x2.get(id) + step);
+           else x2.set(id, x2.get(id) - step);
+
+           t = x1.get(id);
+           x2 = gRatio(f, x1, x2, eps);
+           x1 = new Vector(x2.get(0), x2.get(1));
+
+           if (Math.abs(x2.get(id) - t) < eps ){
+               opt_id ++;
+               if (opt_id == x.size())
+                   break;
+               continue;
+           }
+           opt_id = 0;
+       }
+       return x1;
+    }
 }

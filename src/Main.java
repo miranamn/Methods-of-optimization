@@ -30,10 +30,13 @@ public class Main {
             case 2:
                 Vector x0 = new Vector(5.0, 3.0);
                 Vector x1 = new Vector(0.0, 0.0);
+                Vector t = new Vector(-13.0, 162.5);
                 if (x0.size() != x1.size())
                     System.out.println("Fake data");
-                else
+                else {
                     System.out.println("Золотое сечение: " + LR2.gRatio(f2, x0, x1, Const.eps).toString());
+                    System.out.println("Зейделя : " + LR2.descentMethod(f2, t, Const.eps).toString());
+                }
                 break;
             default:
                 System.out.println("Fake data");

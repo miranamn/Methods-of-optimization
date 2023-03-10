@@ -42,7 +42,6 @@ public class Vector {
             res += (pow(val, 2));
         return sqrt(res);
     }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
