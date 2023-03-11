@@ -21,7 +21,7 @@ public class Main {
                 testLR1(sc);
                 break;
             case 2:
-                testLR2(sc);
+                testLR2();
                 break;
             default:
                 System.out.println("Fake data");
@@ -38,10 +38,10 @@ public class Main {
         System.out.println("Фибоначчи: " + LR1.fibonacci(f, xL, xR, Const.eps));
     }
 
-    public static void testLR2(Scanner sc){
+    public static void testLR2(){
         Vector x0 = new Vector(5.0, 3.0);
         Vector x1 = new Vector(0.0, 0.0);
-        Vector t = new Vector(-13.0, 162.5);
+        Vector t = new Vector(-13.0, 12.5);
         if (x0.size() != x1.size())
             System.out.println("Fake data");
         else {

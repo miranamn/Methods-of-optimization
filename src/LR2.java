@@ -1,8 +1,8 @@
 public class LR2 {
 
    public static Vector gRatio(Function2 f, Vector x0, Vector x1, double eps) {
-        Vector a = new Vector(x0.get(0), x0.get(1));
-        Vector b = new Vector(x1.get(0), x1.get(1));
+        Vector a = new Vector(x0);
+        Vector b = new Vector(x1);
         Vector dx;
         while (x1.sub(x0).magnitude() >= eps) {
             dx = b.sub(a).mul(Const.iPhi);
@@ -19,8 +19,8 @@ public class LR2 {
 
     public static Vector descentMethod(Function2 f, Vector x, double eps) {
        double step = 1.0;
-       Vector x1 = new Vector(x.get(0), x.get(1));
-       Vector x2 = new Vector(x.get(0), x.get(1));
+       Vector x1 = new Vector(x);
+       Vector x2 = new Vector(x);
        //eps /= x2.sub(x1).dimension();
        double t, y1, y2;
        int id, opt_id = 0;

@@ -9,10 +9,14 @@ public class Vector {
         vec = new ArrayList<>();
         vec.addAll(Arrays.asList(val));
     }
-
     public Vector (int n){
         vec = new ArrayList<>();
-        for (int i = 0; i < n; i++) vec.set(i, 0.0);
+        for (int i = 0; i < n; i++) vec.add(0.0);
+    }
+    public Vector (Vector n){
+        vec = new ArrayList<>();
+        for (int i = 0; i < n.size(); i++)
+            vec.add(n.get(i));
     }
     public int size(){
         return vec.size();
@@ -24,22 +28,21 @@ public class Vector {
         vec.set(i, val);
     }
     public Vector add(Vector vector) {
-        Vector res = new Vector(0.0, 0.0);
+        Vector res = new Vector(vector.size());
         for (int i = 0; i < vector.size(); i++)
             res.set(i, vec.get(i) + vector.get(i));
         return res;
     }
     public Vector sub(Vector vector) {
-        Vector  res = new Vector(0.0, 0.0);
+        Vector  res = new Vector(vector.size());
         for (int i = 0; i < vector.size(); i++)
             res.set(i, vec.get(i) - vector.get(i));
         return res;
     }
     public Vector mul(double val) {
-        Vector  res = new Vector(0.0, 0.0);
         for (int i = 0; i < vec.size(); i++)
-            res.set(i, vec.get(i) * val);
-        return res;
+            vec.set(i, vec.get(i) * val);
+        return this;
     }
     public double magnitude() {
         double res = 0.0;
