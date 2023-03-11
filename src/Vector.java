@@ -9,6 +9,11 @@ public class Vector {
         vec = new ArrayList<>();
         vec.addAll(Arrays.asList(val));
     }
+
+    public Vector (int n){
+        vec = new ArrayList<>();
+        for (int i = 0; i < n; i++) vec.set(i, 0.0);
+    }
     public int size(){
         return vec.size();
     }
@@ -36,7 +41,7 @@ public class Vector {
             res.set(i, vec.get(i) * val);
         return res;
     }
-    public double dimension() {
+    public double magnitude() {
         double res = 0.0;
         for (double val : vec)
             res += (pow(val, 2));

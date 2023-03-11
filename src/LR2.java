@@ -4,7 +4,7 @@ public class LR2 {
         Vector a = new Vector(x0.get(0), x0.get(1));
         Vector b = new Vector(x1.get(0), x1.get(1));
         Vector dx;
-        while (x1.sub(x0).dimension() >= eps) {
+        while (x1.sub(x0).magnitude() >= eps) {
             dx = b.sub(a).mul(Const.iPhi);
             x0 = b.sub(dx);
             x1 = a.add(dx);
@@ -28,7 +28,6 @@ public class LR2 {
            id = i % x.size();
            x2.set(id, x2.get(id) - eps);
            y1 = f.getF(x2);
-           System.out.println(y1);
            x2.set(id, x2.get(id) + 2.0 * eps);
            y2 = f.getF(x2);
            x2.set(id, x2.get(id) - eps);
