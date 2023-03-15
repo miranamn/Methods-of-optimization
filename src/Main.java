@@ -11,7 +11,6 @@ public class Main {
     public static final Function f = Main::testF;
     public static final Function2 f2 = Main::testF2;
 
-
     public static void main(String[] args) {
         System.out.print("Enter lab work = ");
         Scanner sc = new Scanner(System.in);
@@ -22,6 +21,9 @@ public class Main {
                 break;
             case 2:
                 testLR2();
+                break;
+            case 3:
+                testLR3();
                 break;
             default:
                 System.out.println("Fake data");
@@ -48,6 +50,10 @@ public class Main {
             System.out.println("Золотое сечение: " + LR2.gRatio(f2, x0, x1, Const.eps).toString());
             System.out.println("Зейделя : " + LR2.descentMethod(f2, t, Const.eps).toString());
         }
+    }
+    public static void testLR3(){
+        Vector t = new Vector(-13.0, 12.5);
+        System.out.println("GRAD : " + LR3.descentMethod(f2, t, Const.eps).toString());
     }
 
 

@@ -50,6 +50,14 @@ public class Vector {
             res += (pow(val, 2));
         return sqrt(res);
     }
+//только для 3-х мерного случая
+    //????
+    public Vector getGradient(Function2 f, Vector v) {
+        double x = (f.getF(new Vector(v.get(0) + Const.eps, v.get(1))) - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;
+        double y = (f.getF(new Vector(v.get(0), v.get(1) + Const.eps)) - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;
+        return new Vector(x, y);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

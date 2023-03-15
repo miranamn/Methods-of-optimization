@@ -21,7 +21,6 @@ public class LR2 {
        double step = 1.0;
        Vector x1 = new Vector(x);
        Vector x2 = new Vector(x);
-       //eps /= x2.sub(x1).dimension();
        double t, y1, y2;
        int id, opt_id = 0;
        for(int i = 0; i < 1000; i++) {
