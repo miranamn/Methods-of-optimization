@@ -2,14 +2,18 @@ public class LR3 {
     public static Vector descentMethod(Function2 f, Vector x, double eps) {
         // блендер делает смузи
         //функция делает градиент
-        // только трехмерный случай
-        Vector nextStep, x2;
-        for(int i = 0;;i++){
+        Vector x1, x2;
+        for(;;){
             x2 = x.getGradient(f, x);
-            nextStep = x.sub(x2.mul(0.5));
-            if(f.getF(nextStep) - f.getF(x2) < eps)
-                return nextStep;
-            x = new Vector(nextStep);
+            x1 = x.sub(x2.mul(0.5));
+            if(f.getF(x1) - f.getF(x2) < eps)
+                return x1;
+            x = new Vector(x1);
         }
     }
+    /*public static Vector tenseGradientMethod(Function2 f, Vector x, double eps) {
+
+
+    }*/
+
 }

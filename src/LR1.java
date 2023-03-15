@@ -23,8 +23,7 @@ public class LR1 {
             else
                 x2 = xR;
         }
-        double xC = (xR + xL) * 0.5;
-        return xC;
+        return (xR + xL) * 0.5;
     }
 
     public static int[] closed_fib(double arg) {
@@ -44,7 +43,7 @@ public class LR1 {
     } */
 
     public static double fibonacci(Function f, double x1, double x2, double eps) {
-        double xL = x1, xR = x2;
+        double xL, xR;
         int fTmp;
         int[] ff = closed_fib((x2 - x1) / eps);
         int f_n = ff[0];
