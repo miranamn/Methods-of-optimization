@@ -6,7 +6,8 @@ public class Main {
         return ((X - 5) * (X - 2));
     }
     public static double testF2(Vector x) {
-        return (x.get(0) - 5) * x.get(0) + (x.get(1) - 3) * x.get(1)+ (x.get(2) - 3) * x.get(2);
+        // return (x.get(0) - 5) * x.get(0) + (x.get(1) - 3) * x.get(1) + (x.get(2) - 1) * x.get(2);
+        return (x.get(0) - 5) * x.get(0) + (x.get(1) - 3) * x.get(1);
     }
     public static final Function f = Main::testF;
     public static final Function2 f2 = Main::testF2;

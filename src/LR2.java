@@ -5,7 +5,7 @@ public class LR2 {
         Vector b = new Vector(x1);
         Vector dx;
         while (x1.sub(x0).magnitude() >= eps) {
-            dx = b.sub(a).mul(Const.iPhi);
+            dx = (b.sub(a)).mul(Const.iPhi);
             x0 = b.sub(dx);
             x1 = a.add(dx);
             if (f.getF(x0) >= f.getF(x1))
@@ -13,8 +13,7 @@ public class LR2 {
             else
                 b = x1;
         }
-        dx = x1.add(x0).mul(0.5);
-        return dx;
+        return x1.add(x0).mul(0.5);
    }
 
     public static Vector descentMethod(Function2 f, Vector x, double eps) {
