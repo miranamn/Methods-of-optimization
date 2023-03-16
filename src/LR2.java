@@ -36,7 +36,7 @@ public class LR2 {
 
            t = x1.get(id);
            x2 = gRatio(f, x1, x2, eps);
-           x1 = new Vector(x2.get(0), x2.get(1));
+           x1 = new Vector(x2);
 
            if (Math.abs(x2.get(id) - t) < eps ){
                opt_id ++;

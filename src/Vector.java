@@ -50,7 +50,7 @@ public class Vector {
             res += (pow(val, 2));
         return sqrt(res);
     }
-//только для 3-х мерного случая
+    //TODO для трехмерного вектора
     public Vector getGradient(Function2 f, Vector v) {
         double x = (f.getF(new Vector(v.get(0) + Const.eps, v.get(1)))
                 - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;

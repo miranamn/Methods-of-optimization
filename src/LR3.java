@@ -2,6 +2,7 @@ public class LR3 {
     public static Vector descentMethod(Function2 f, Vector x, double eps) {
         // блендер делает смузи
         //функция делает градиент
+        //TODO для случая нескольких n
         Vector x1, x2;
         for(;;){
             x2 = x.getGradient(f, x);

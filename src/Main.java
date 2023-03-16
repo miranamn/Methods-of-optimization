@@ -6,7 +6,7 @@ public class Main {
         return ((X - 5) * (X - 2));
     }
     public static double testF2(Vector x) {
-        return (x.get(0) - 5) * x.get(0) + (x.get(1) - 3) * x.get(1);
+        return (x.get(0) - 5) * x.get(0) + (x.get(1) - 3) * x.get(1)+ (x.get(2) - 3) * x.get(2);
     }
     public static final Function f = Main::testF;
     public static final Function2 f2 = Main::testF2;
@@ -41,9 +41,9 @@ public class Main {
     }
 
     public static void testLR2(){
-        Vector x0 = new Vector(5.0, 3.0);
-        Vector x1 = new Vector(0.0, 0.0);
-        Vector t = new Vector(-13.0, 12.5);
+        Vector x0 = new Vector(5.0, 3.0, -12.0);
+        Vector x1 = new Vector(0.0, 0.0, 7.2 );
+        Vector t = new Vector(-12.0, 15.3, 0.0);
         if (x0.size() != x1.size())
             System.out.println("Fake data");
         else {
