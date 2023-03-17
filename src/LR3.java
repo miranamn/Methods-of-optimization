@@ -1,8 +1,5 @@
 public class LR3 {
     public static Vector descentMethod(Function2 f, Vector x, double eps) {
-        // блендер делает смузи
-        //функция делает градиент
-        //TODO для случая нескольких n
         Vector x1, x2;
         for(;;){
             x2 = x.getGradient(f, x);
@@ -12,9 +9,13 @@ public class LR3 {
             x = new Vector(x1);
         }
     }
-    /*public static Vector tenseGradientMethod(Function2 f, Vector x, double eps) {
-
-
-    }*/
+    public static Vector tenseGradientMethod(Function2 f, Vector x, double eps) {
+        Vector start = (x.getGradient(f, x)).mul(-1.0); //антиградиент
+        Vector x1 = new Vector(x);
+        Vector x2 = new Vector(x);
+        for(;;){
+            x1 = x.add(start);
+        }
+    }
 
 }

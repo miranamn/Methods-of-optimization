@@ -52,11 +52,23 @@ public class Vector {
     }
     //TODO для трехмерного вектора
     public Vector getGradient(Function2 f, Vector v) {
-        double x = (f.getF(new Vector(v.get(0) + Const.eps, v.get(1)))
-                - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;
-        double y = (f.getF(new Vector(v.get(0), v.get(1) + Const.eps))
-                - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;
-        return new Vector(x, y);
+        double x, y, z = 0;
+        if(v.size() == 2) {
+            x = (f.getF(new Vector(v.get(0) + Const.eps, v.get(1)))
+                    - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;
+            y = (f.getF(new Vector(v.get(0), v.get(1) + Const.eps))
+                    - f.getF(new Vector(v.get(0), v.get(1)))) / Const.eps;
+            v = new Vector(x, y);
+        } else if (v.size() == 3){
+            x = (f.getF(new Vector(v.get(0) + Const.eps, v.get(1), v.get(2)))
+                    - f.getF(new Vector(v.get(0), v.get(1), v.get(2)))) / Const.eps;
+            y = (f.getF(new Vector(v.get(0), v.get(1) + Const.eps, v.get(2)))
+                    - f.getF(new Vector(v.get(0), v.get(1), v.get(2)))) / Const.eps;
+            z = (f.getF(new Vector(v.get(0), v.get(1), v.get(2) + Const.eps))
+                    - f.getF(new Vector(v.get(0), v.get(1), v.get(2)))) / Const.eps;
+            v = new  Vector(x, y, z);
+        }
+        return v;
     }
 
     @Override
