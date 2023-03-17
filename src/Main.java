@@ -55,6 +55,7 @@ public class Main {
     public static void testLR3(){
         Vector t = new Vector(-13.0, 12.5, -2.0);
         System.out.println("Градиентный спуск : " + LR3.descentMethod(f2, t, Const.eps).toString());
+        System.out.println("Сопряженный градиент : " + LR3.tenseGradientMethod(f2, t, Const.eps).toString());
     }
 
 
