@@ -44,6 +44,21 @@ public class Vector {
             vec.set(i, vec.get(i) * val);
         return this;
     }
+    public Vector normalize()
+    {
+        double inv_mag = 1.0 / magnitude();
+
+        for (int i = 0; i < size(); i++) this.set(i,  this.get(i) * inv_mag);
+
+        return this;
+    }
+    public static Vector direction(Vector a, Vector b)
+    {
+        if (a.size() != b.size()) throw new RuntimeException("Vectors direction :: a.Size()!= b.Size()");
+
+        return b.sub(a).normalize();
+    }
+
     public double magnitude() {
         double res = 0.0;
         for (double val : vec)
@@ -51,7 +66,7 @@ public class Vector {
         return sqrt(res);
     }
     //TODO для трехмерного вектора
-    public Vector getGradient(Function2 f, Vector v) {
+   /* public Vector getGradient(Function2 f, Vector v) {
         double x, y, z = 0;
         if(v.size() == 2) {
             x = (f.getF(new Vector(v.get(0) + Const.eps, v.get(1)))
@@ -69,6 +84,21 @@ public class Vector {
             v = new  Vector(x, y, z);
         }
         return v;
+    }
+*/
+    public static Vector getGradient(Function2 func, Vector x, double eps) {
+        Vector df = new Vector(x.size());
+        for (int i = 0; i < x.size(); i++)  df.set(i, partial(func, x, i, eps));
+        return df;
+    }
+
+    public static double partial (Function2 func, Vector x, int index, double eps ) {
+        x.set(index,  x.get(index) + eps);
+        double f_r = func.getF(x);
+        x.set(index,  x.get(index) - 2.0 * eps);
+        double f_l = func.getF(x);
+        x.set(index,  x.get(index) +  eps);
+        return (f_r - f_l) / eps * 0.5;
     }
 
     @Override
