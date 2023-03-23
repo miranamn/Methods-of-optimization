@@ -15,7 +15,7 @@ public class LR2 {
         return x1.add(x0).mul(0.5);
    }
 
-    public static Vector descentMethod(Function2 f, Vector x, double eps) {
+    public static Vector descendMethod(Function2 f, Vector x, double eps) {
        double step = 1.0;
        Vector x1 = new Vector(x);
        Vector x2 = new Vector(x);

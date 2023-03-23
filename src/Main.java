@@ -52,13 +52,14 @@ public class Main {
             System.out.println("Fake data");
         else {
             System.out.println("Золотое сечение: " + LR2.gRatio(f2, x0, x1, Const.eps).toString());
-            System.out.println("Зейделя : " + LR2.descentMethod(f2, t, Const.eps).toString());
+            System.out.println("Зейделя : " + LR2.descendMethod(f2, t, Const.eps).toString());
         }
     }
     public static void testLR3(){
         Vector t = new Vector(64);
-        System.out.println("Градиентный спуск : " + LR3.descentMethod(f2, t, Const.eps).toString());
+        System.out.println("Градиентный спуск : " + LR3.descendMethod(f2, t, Const.eps).toString());
         System.out.println("Сопряженный градиент : " + LR3.tenseGradientMethod(f2, t, Const.eps).toString());
+        System.out.println("Градиентный спуск для Юрия Станиславовича : " + LR3.descendMethodForYuryStrelkov(f2, t, Const.eps).toString());
     }
 
 
