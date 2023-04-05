@@ -8,12 +8,14 @@ public class Main {
     public static double testF2(Vector x) {
         double val = 0.0;
         for (int i = 0; i < x.size(); i++) {
-            val += (x.get(i) - i) * (x.get(i) - i);
+            val += ((x.get(i) - i) * x.get(i));
         }
         return val;
     }
+
     public static final Function f = Main::testF;
     public static final Function2 f2 = Main::testF2;
+
 
     public static void main(String[] args) {
         System.out.print("Enter lab work = ");
@@ -28,6 +30,9 @@ public class Main {
                 break;
             case 3:
                 testLR3();
+                break;
+            case 4:
+                testLR4();
                 break;
             default:
                 System.out.println("Fake data");
@@ -60,6 +65,12 @@ public class Main {
         System.out.println("Градиентный спуск : " + LR3.descendMethod(f2, t, Const.eps).toString());
         System.out.println("Сопряженный градиент : " + LR3.tenseGradientMethod(f2, t, Const.eps).toString());
         System.out.println("Градиентный спуск для Юрия Станиславовича : " + LR3.descendMethodForYuryStrelkov(f2, t, Const.eps).toString());
+    }
+    public static void testLR4(){
+        Vector t = new Vector(45);
+        System.out.println("Ньютон Рафсон : " + LR4.newtoneRaphson(f2, t, Const.eps).toString());
+        Vector x0 = new Vector(-7.0, 3.8);
+
     }
 
 

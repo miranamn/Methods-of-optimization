@@ -51,6 +51,11 @@ public class Vector {
             res += (pow(val, 2));
         return sqrt(res);
     }
+    public double dot(Vector other) {
+        double dot = 0.0;
+        for (int i = 0; i < other.size(); i++) dot += this.get(i) * other.get(i);
+        return dot;
+    }
     public static Vector getGradient(Function2 f, Vector x) {
         Vector df = new Vector(x.size());
         for (int i = 0; i < x.size(); i++)  df.set(i, partial(f, x, i));
@@ -64,6 +69,15 @@ public class Vector {
         double f_l = f.getF(x);
         x.set(index,  x.get(index) +  Const.eps);
         return (f_r - f_l) / Const.eps * 0.5;
+    }
+
+    public static double partial2(Function2 f, Vector x, int index1, int index2, double eps) {
+        x.set(index2,  x.get(index2) - eps);
+        double f_l = partial(f, x, index1);
+        x.set(index2,  x.get(index2) + 2.0 * eps);
+        double f_r = partial(f, x, index1);
+        x.set(index2,  x.get(index2) - eps);
+        return (f_r - f_l) / eps * 0.5;
     }
 
     @Override
