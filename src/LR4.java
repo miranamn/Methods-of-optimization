@@ -1,4 +1,3 @@
-import java.util.List;
 
 public class LR4 {
 
@@ -14,15 +13,4 @@ public class LR4 {
         }
     }
 
-    /* public static Vector getPenalty(Function2 f, Vector x, double eps) {
-        double r = 1.0;
-        double b = 0.4;
-        Vector x1;
-        for(;;){
-            x1 = newtoneRaphson(f, x, eps);
-            if((r * f.getF(x1)) < eps) return x1;
-            x = x1;
-            r  *= b;
-        }
-    }*/
 }

@@ -8,7 +8,7 @@ public class Main {
     public static double testF2(Vector x) {
         double val = 0.0;
         for (int i = 0; i < x.size(); i++) {
-            val += ((x.get(i) - i) * x.get(i));
+            val += ((x.get(i) - 0.5 * i) * (x.get(i) - 0.5 * i));
         }
         return val;
     }
@@ -33,6 +33,9 @@ public class Main {
                 break;
             case 4:
                 testLR4();
+                break;
+            case 5:
+                testLR5();
                 break;
             default:
                 System.out.println("Fake data");
@@ -67,10 +70,17 @@ public class Main {
         System.out.println("Градиентный спуск для Юрия Станиславовича : " + LR3.descendMethodForYuryStrelkov(f2, t, Const.eps).toString());
     }
     public static void testLR4(){
-        Vector t = new Vector(45);
+        Vector t = new Vector(5);
         System.out.println("Ньютон Рафсон : " + LR4.newtoneRaphson(f2, t, Const.eps).toString());
-        Vector x0 = new Vector(-7.0, 3.8);
-
+    }
+    public static void testLR5(){
+        Vector a1 = new Vector(5.0, 3.0);
+        Vector a2 = new Vector(0.5, 6.0);
+        Matrix a = new Matrix(a1, a2);
+        Vector b = new Vector(2.5, 5.0);
+        Vector c = new Vector(2.0, 3.2);
+        String[] arr = {"<=", "<="};
+        System.out.println("симплекс : " + LR5.Simplex(a, b, c, arr));
     }
 
 

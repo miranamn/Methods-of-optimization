@@ -13,6 +13,10 @@ public class Vector {
         vec = new ArrayList<>();
         for (int i = 0; i < n; i++) vec.add(0.0);
     }
+    public Vector (int n, double val){
+        vec = new ArrayList<>();
+        for (int i = 0; i < n; i++) vec.add(val);
+    }
     public Vector (Vector n){
         vec = new ArrayList<>();
         for (int i = 0; i < n.size(); i++)
@@ -44,7 +48,9 @@ public class Vector {
             vec.set(i, vec.get(i) * val);
         return this;
     }
-
+    public void pushBack(double value) {
+        vec.add(value);
+    }
     public double magnitude() {
         double res = 0.0;
         for (double val : vec)
