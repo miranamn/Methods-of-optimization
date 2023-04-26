@@ -46,6 +46,11 @@ public class Matrix {
         row(i).set(j,value);
     }
 
+    public Vector getCol(int i){
+        Vector res = new Vector(rows());
+        for(int j = 0; j < res.size(); j++) res.set(j, this.get(j, i));
+        return res;
+    }
     public Matrix(int n_rows, int n_cols) {
         rows = new ArrayList<>(n_rows);
         for (int i = 0; i < n_rows; i++) rows.add(new Vector(n_cols));
@@ -169,9 +174,32 @@ public class Matrix {
         for (int i = 0; i < rows.size(); i++) row(i).pushBack(col.get(i));
         return this;
     }
+
+    public static Matrix addFrontVec(Vector col, Matrix m) {
+        Matrix res = new Matrix(m.rows(), m.cols() + 1);
+        for(int i = 0; i < m.rows(); i++){
+            res.set(i, 0, col.get(i));
+        }
+        for(int i = 0; i < m.rows(); i++){
+            for(int j = 1; j < res.cols(); j++){
+                res.set(i, j, m.get(i, j - 1));
+            }
+        }
+        return res;
+    }
     public Matrix addRow(Vector row) {
         rows.add(row);
         return this;
     }
+    public Matrix EMatrix() {
+        for(int i = 0; i < rows(); i++){
+            for(int j = 0; j < cols(); j++){
+                if (i == j) this.set(i, j, 1.0);
+            }
+        }
+        return this;
+    }
+
+
 
 }
