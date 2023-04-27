@@ -7,18 +7,21 @@ public class LR5 {
                 return DoubleSimplex(a, b,c, arr);
             }
         }
+        c.mul(-1.0);
         a = simplexTable(a, b, c);
+
         System.out.println(a.toString());
+        System.out.println();
         //пока в последней строке есть отрицательный элемент
         int MainCol = 0;
         int MainRow = 0;
         while (searchMinus(a)){
             MainCol = searchNewCol(a);
             MainRow = searchNewRow(a, MainCol);
-            a = newSimplesTable(MainCol, MainRow);
-            System.out.println(MainCol + " " + MainRow);
+            a = newSimplesTable(a, MainCol, MainRow);
+           // System.out.println(MainCol + " " + MainRow);
         }
-
+        System.out.println(a.toString());
         return new Vector(b.size());
     }
 
@@ -56,8 +59,29 @@ public class LR5 {
         return k;
     }
 
-    public static Matrix newSimplesTable(int MainCol, int MainRow){
-            return new Matrix(MainCol, MainRow);
+    public static Matrix newSimplesTable(Matrix a, int k, int r){
+        Matrix res = new Matrix(a.rows(), a.cols());
+        for(int i = 0; i < a.rows() - 1; i++){
+            if(i == r) continue;
+            for(int j = 1; j < a.cols(); j++){
+                res.set(i, j, a.get(i,j) - a.get(r, j) * a.get(i, k) / a.get(r, k));
+            }
+        }
+        //пересчитываю столбец b
+        for(int i = 0; i < a.rows() - 1; i++){
+            if(i == r) continue;
+            res.set(i,0, a.get(i, 0) - (a.get(r, 0) * a.get(i, k) / a.get(r, k)));
+        }
+        //пересчитываем значение f
+        res.set(a.rows() - 1,0, a.get(a.rows() - 1,0) - a.get(r, 0) * a.get(a.rows() - 1, k) / a.get(r, k));
+        //пересчитываем все дельты
+        for (int i = 1; i < a.cols(); i++){
+            res.set(a.rows() - 1, i, a.get(a.rows() - 1, i) - (a.get(r, i) * a.get(a.rows() - 1, k) / a.get(r, k)));
+        }
+        for(int i = 0; i < a.cols(); i++){
+            res.set(r, i, a.get(r, i) / a.get(r, k)); //элементы главной строки необходимо разделить на ведущий элемент
+        }
+        return res;
     }
 
     public static int searchNewRow(Matrix a, int col){
