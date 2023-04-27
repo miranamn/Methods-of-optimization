@@ -76,9 +76,10 @@ public class Main {
     public static void testLR5(){
         Vector a1 = new Vector(5.0, 3.0);
         Vector a2 = new Vector(0.5, 6.0);
+       // Vector a3 = new Vector(1.5, 2.0);
         Matrix a = new Matrix(a1, a2);
         Vector b = new Vector(2.5, 5.0);
-        Vector c = new Vector(2.0, 3.2);
+        Vector c = new Vector(-2.0, 3.2);
         String[] arr = {"<=", "<="};
         System.out.println("симплекс : " + LR5.Simplex(a, b, c, arr));
     }

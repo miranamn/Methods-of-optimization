@@ -19,14 +19,12 @@ public class Matrix {
 
     @Override
     public String toString() {
-        StringBuilder sb =new StringBuilder();
-        sb.append("{\n");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < rows.size() - 1; i++) {
             sb.append(" ").append(rows.get(i).toString());
-            sb.append(",\n");
+            sb.append("\n");
         }
         sb.append(" ").append(rows.get(rows.size() - 1).toString());
-        sb.append("\n}");
         return sb.toString();
     }
 
