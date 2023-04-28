@@ -79,9 +79,9 @@ public class Main {
         Vector a3 = new Vector(2.0, -1.0);
         Matrix a = new Matrix(a1, a2, a3);
         Vector b = new Vector(40.0, 28.0, 14.0);
-        Vector c = new Vector(2.0, 3.0);
+        Vector c = new Vector(2.0, -3.0);
         String[] arr = {"<=", "<=", "<="};
-        System.out.println("симплекс : " + LR5.Simplex(a, b, c, arr));
+        LR5.Simplex(a, b, c, arr);
     }
 
 

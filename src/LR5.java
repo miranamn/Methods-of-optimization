@@ -1,27 +1,86 @@
 public class LR5 {
-    public static Vector Simplex(Matrix a, Vector b, Vector c, String[] arr) {
+    public static void Simplex(Matrix a, Vector b, Vector c, String[] arr) {
         MinusMul(a, b, arr);
+
+        int[] basisArr = new int[b.size()];
+        int first = a.cols() + 1;
+        for(int i = 0; i < b.size(); i++){
+            basisArr[i] = first + i;
+        }
+        int[] freeArr = new int[a.cols()];
+        for(int i = 0; i < a.cols(); i++){
+            freeArr[i] = i + 1;
+        }
         //двухфазный симплекс - пока затычка
         for(int i = 0; i < arr.length; i++){
             if(arr[i].equals(">=") || arr[i].equals("=")){
-                return DoubleSimplex(a, b,c, arr);
+                //DoubleSimplex(a, b,c, arr);
             }
         }
-        c.mul(-1.0);
-        a = simplexTable(a, b, c);
-        int MainCol = 0;
-        int MainRow = 0;
         Matrix a1 = a;
+        c.mul(-1.0);
+
+        a = simplexTable(a, b, c);
         System.out.println(a.toString());
         System.out.println();
+        maxSimplex(a, basisArr, freeArr);
+
+
+        a1 = simplexTable(a1, b, c);
+        minSimplex(a1, basisArr, freeArr);
+    }
+
+    public static void minSimplex(Matrix a, int[] basisArr, int[] freeArr){
+        System.out.println();
+        System.out.println("MINIMUM: ");
+        int MainCol = 0;
+        int MainRow = 0;
+        while (searchPlus(a)){
+            MainCol = searchNewColMin(a);
+            MainRow = searchNewRow(a, MainCol);
+            System.out.println("a_main = {x" + basisArr[MainRow] + " x" + freeArr[MainCol - 1] + "} = " + a.get(MainRow, MainCol));
+            int tempBasis = basisArr[MainRow];
+            basisArr[MainRow] = freeArr[MainCol - 1];
+            freeArr[MainCol - 1] = tempBasis;
+            a = newSimplesTable(a, MainCol, MainRow);
+            System.out.print("Free: ");
+            for(int i = 0; i < freeArr.length; i++){
+                System.out.print(freeArr[i] + " ");
+            }
+            System.out.println();
+            System.out.print("Basis: ");
+            for(int i = 0; i < basisArr.length; i++){
+                System.out.print(basisArr[i]+ " ");
+            }
+            System.out.println();
+            System.out.println("target function = {" + a.get(a.rows() - 1, 0) + "}");
+        }
+    }
+
+    public static void maxSimplex(Matrix a, int[] basisArr, int[] freeArr){
+        System.out.println("MAXIMUM: ");
+        int MainCol = 0;
+        int MainRow = 0;
         while (searchMinus(a)){
             MainCol = searchNewCol(a);
             MainRow = searchNewRow(a, MainCol);
-            System.out.println(MainCol + " " + MainRow);
+            System.out.println("a_main = {x" + basisArr[MainRow] + " x" + freeArr[MainCol - 1] + "} = " + a.get(MainRow, MainCol));
+            int tempBasis = basisArr[MainRow];
+            basisArr[MainRow] = freeArr[MainCol - 1];
+            freeArr[MainCol - 1] = tempBasis;
             a = newSimplesTable(a, MainCol, MainRow);
+            System.out.print("Free: ");
+            for(int i = 0; i < freeArr.length; i++){
+                System.out.print(freeArr[i] + " ");
+            }
+            System.out.println();
+            System.out.print("Basis: ");
+            for(int i = 0; i < basisArr.length; i++){
+                System.out.print(basisArr[i]+ " ");
+            }
+            System.out.println();
+            System.out.println("target function = {" + a.get(a.rows() - 1, 0) + "}");
         }
-
-        return new Vector(b.size());
     }
 
     //к каноническому виду
@@ -57,6 +116,19 @@ public class LR5 {
         for (int i = 1; i < a.cols(); i++){
             tempMax = a.get(a.rows()-1, i);
             if(tempMax < 0 && Math.abs(tempMax) > max){
+                max = tempMax;
+                k = i;
+            }
+        }
+        return k;
+    }
+    public static int searchNewColMin(Matrix a){
+        int k = 0;
+        double max = 0;
+        double tempMax;
+        for (int i = 1; i < a.cols(); i++){
+            tempMax = a.get(a.rows()-1, i);
+            if(tempMax > 0 && tempMax > max){
                 max = tempMax;
                 k = i;
             }
@@ -121,9 +193,4 @@ public class LR5 {
         return a;
     }
 
-
-    public static Vector DoubleSimplex(Matrix a, Vector b, Vector c, String[] arr) {
-        Vector result = new Vector(b.size());
-        return result;
-    }
 }
