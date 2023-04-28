@@ -9,19 +9,18 @@ public class LR5 {
         }
         c.mul(-1.0);
         a = simplexTable(a, b, c);
-
-        System.out.println(a.toString());
-        System.out.println();
-        //пока в последней строке есть отрицательный элемент
         int MainCol = 0;
         int MainRow = 0;
+        Matrix a1 = a;
+        System.out.println(a.toString());
+        System.out.println();
         while (searchMinus(a)){
             MainCol = searchNewCol(a);
             MainRow = searchNewRow(a, MainCol);
+            System.out.println(MainCol + " " + MainRow);
             a = newSimplesTable(a, MainCol, MainRow);
-           // System.out.println(MainCol + " " + MainRow);
         }
-        System.out.println(a.toString());
+
         return new Vector(b.size());
     }
 
@@ -41,6 +40,12 @@ public class LR5 {
     public static boolean searchMinus(Matrix a){
         for(int i = 0; i < a.cols(); i++){
             if (a.get(a.rows() - 1, i) < 0) return true;
+        }
+        return false;
+    }
+    public static boolean searchPlus(Matrix a){
+        for(int i = 0; i < a.cols(); i++){
+            if (a.get(a.rows() - 1, i) > 0) return true;
         }
         return false;
     }
@@ -81,23 +86,24 @@ public class LR5 {
         for(int i = 0; i < a.cols(); i++){
             res.set(r, i, a.get(r, i) / a.get(r, k)); //элементы главной строки необходимо разделить на ведущий элемент
         }
+        System.out.println(res.toString());
+        System.out.println();
         return res;
     }
 
     public static int searchNewRow(Matrix a, int col){
         int k = 0;
-        double min = a.get(0,0) / a.get(0, col);
+        double min = Math.abs(a.get(0,0) / a.get(0, col));
         double tempMin;
         for (int i = 1; i < a.rows() - 1; i++){
             tempMin = a.get(i,0) / a.get(i, col);
-            if(tempMin < min){
+            if(Math.abs(tempMin) < min){
                 min = tempMin;
                 k = i;
             }
         }
         return k;
     }
-
 
     //построение симплекс - талблицы
     public static Matrix simplexTable(Matrix a, Vector b, Vector c){
@@ -114,7 +120,6 @@ public class LR5 {
         a.addRow(f);
         return a;
     }
-
 
 
     public static Vector DoubleSimplex(Matrix a, Vector b, Vector c, String[] arr) {
