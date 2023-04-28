@@ -1,7 +1,6 @@
 public class LR5 {
     public static void Simplex(Matrix a, Vector b, Vector c, String[] arr) {
         MinusMul(a, b, arr);
-
         int[] basisArr = new int[b.size()];
         int first = a.cols() + 1;
         for(int i = 0; i < b.size(); i++){
@@ -11,32 +10,33 @@ public class LR5 {
         for(int i = 0; i < a.cols(); i++){
             freeArr[i] = i + 1;
         }
-        //двухфазный симплекс - пока затычка
-        for(int i = 0; i < arr.length; i++){
-            if(arr[i].equals(">=") || arr[i].equals("=")){
+        for (String s : arr) {
+            if (s.equals(">=") || s.equals("=")) {
                 //DoubleSimplex(a, b,c, arr);
             }
         }
-        Matrix a1 = a;
         c.mul(-1.0);
 
         a = simplexTable(a, b, c);
         System.out.println(a.toString());
         System.out.println();
-        maxSimplex(a, basisArr, freeArr);
-
-
-        a1 = simplexTable(a1, b, c);
-        minSimplex(a1, basisArr, freeArr);
+        Simplex(a, basisArr, freeArr, "min", c);
     }
 
-    public static void minSimplex(Matrix a, int[] basisArr, int[] freeArr){
+    public static void Simplex(Matrix a, int[] basisArr, int[] freeArr, String problemType, Vector c){
         System.out.println();
-        System.out.println("MINIMUM: ");
         int MainCol = 0;
         int MainRow = 0;
-        while (searchPlus(a)){
-            MainCol = searchNewColMin(a);
+        boolean f = true;
+        while (f) {
+            if(problemType.equals("min")){
+                System.out.println("minimum: ");
+                MainCol = searchNewColMin(a);
+            }
+            else{
+                System.out.println("maximum: ");
+                MainCol = searchNewCol(a);
+            }
             MainRow = searchNewRow(a, MainCol);
             System.out.println("a_main = {x" + basisArr[MainRow] + " x" + freeArr[MainCol - 1] + "} = " + a.get(MainRow, MainCol));
             int tempBasis = basisArr[MainRow];
@@ -53,33 +53,20 @@ public class LR5 {
                 System.out.print(basisArr[i]+ " ");
             }
             System.out.println();
-            System.out.println("target function = {" + a.get(a.rows() - 1, 0) + "}");
+            if(problemType.equals("min")) f = searchPlus(a);
+            else f = searchMinus(a);
         }
-    }
+        System.out.println("target function = {" + a.get(a.rows() - 1, 0) + "}");
 
-    public static void maxSimplex(Matrix a, int[] basisArr, int[] freeArr){
-        System.out.println("MAXIMUM: ");
-        int MainCol = 0;
-        int MainRow = 0;
-        while (searchMinus(a)){
-            MainCol = searchNewCol(a);
-            MainRow = searchNewRow(a, MainCol);
-            System.out.println("a_main = {x" + basisArr[MainRow] + " x" + freeArr[MainCol - 1] + "} = " + a.get(MainRow, MainCol));
-            int tempBasis = basisArr[MainRow];
-            basisArr[MainRow] = freeArr[MainCol - 1];
-            freeArr[MainCol - 1] = tempBasis;
-            a = newSimplesTable(a, MainCol, MainRow);
-            System.out.print("Free: ");
-            for(int i = 0; i < freeArr.length; i++){
-                System.out.print(freeArr[i] + " ");
+        int[] solF = new int[c.size()];
+        for(int i = 0; i < solF.length; i++)
+            solF[i] = i + 1;
+        for(int i = 0; i < basisArr.length; i++){
+            for (int j = 0; j < solF.length; j++){
+                if(solF[j] == basisArr[i]){
+                    System.out.println("x" + (j + 1) + " = " + a.get(i, 0));
+                }
             }
-            System.out.println();
-            System.out.print("Basis: ");
-            for(int i = 0; i < basisArr.length; i++){
-                System.out.print(basisArr[i]+ " ");
-            }
-            System.out.println();
-            System.out.println("target function = {" + a.get(a.rows() - 1, 0) + "}");
         }
     }
 
