@@ -1,3 +1,8 @@
+package Labs;
+
+import TClasses.Function;
+import utils.Const;
+
 public class LR1 {
 
     public static double dihtomia(Function f, double xL, double xR, double eps) {

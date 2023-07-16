@@ -1,3 +1,9 @@
+package Labs;
+
+import Labs.LR2;
+import TClasses.Function2;
+import TClasses.Vector;
+
 public class LR3 {
     public static Vector descendMethod(Function2 f, Vector x, double eps) {
         Vector x1, x2;

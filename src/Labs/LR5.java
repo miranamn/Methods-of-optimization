@@ -1,3 +1,8 @@
+package Labs;
+
+import TClasses.Matrix;
+import TClasses.Vector;
+
 public class LR5 {
     public static void Simplex(Matrix a, Vector b, Vector c, String[] arr) {
         MinusMul(a, b, arr);

@@ -1,3 +1,9 @@
+package Labs;
+
+import TClasses.Function2;
+import TClasses.Vector;
+import utils.Const;
+
 public class LR2 {
    public static Vector gRatio(Function2 f, Vector x0, Vector x1, double eps) {
         Vector a = new Vector(x0);

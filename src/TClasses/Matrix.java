@@ -1,3 +1,5 @@
+package TClasses;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -115,7 +117,7 @@ public class Matrix {
         return  new Matrix[]{low,up};
     }
 
-    private static Vector linsolve( Matrix low,  Matrix up,  Vector b) {
+    private static Vector linsolve(Matrix low, Matrix up, Vector b) {
         double det = 1.0;
         Vector x, z;
         for (int i = 0; i < up.rows(); i++) det *= (up.get(i,i) * up.get(i,i));

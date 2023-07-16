@@ -1,3 +1,10 @@
+import Labs.*;
+import TClasses.Function;
+import TClasses.Function2;
+import TClasses.Matrix;
+import TClasses.Vector;
+import utils.Const;
+
 import java.util.Scanner;
 
 public class Main {
